@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
 import { useState, useEffect } from "react";
 
 // List of Motivational Quotes
 const quotes = [
-  "Believe you can and you're halfway there. – Theodore Roosevelt",
-  "Don't watch the clock; do what it does. Keep going. – Sam Levenson",
+  "Believe you can and you&apos;re halfway there. – Theodore Roosevelt",
+  "Don&apos;t watch the clock; do what it does. Keep going. – Sam Levenson",
   "Success is not the key to happiness. Happiness is the key to success. – Albert Schweitzer",
   "It does not matter how slowly you go as long as you do not stop. – Confucius",
   "The best way to predict the future is to create it. – Peter Drucker",
-  "Your time is limited, so don't waste it living someone else's life. – Steve Jobs",
+  "Your time is limited, so don&apos;t waste it living someone else&apos;s life. – Steve Jobs",
   "The secret of getting ahead is getting started. – Mark Twain",
   "You don’t have to be great to start, but you have to start to be great. – Zig Ziglar",
   "The only limit to our realization of tomorrow is our doubts of today. – Franklin D. Roosevelt",
-  "Opportunities don't happen. You create them. – Chris Grosser",
+  "Opportunities don&apos;t happen. You create them. – Chris Grosser",
   "Dream big and dare to fail. – Norman Vaughan",
   "Act as if what you do makes a difference. It does. – William James",
   "Do what you can, with what you have, where you are. – Theodore Roosevelt",
@@ -51,7 +51,7 @@ export default function MotivationClock() {
       {/* Quote Section */}
       <div className="flex-1">
         <h3 className="text-2xl font-semibold">✨ Daily Motivation</h3>
-        <p className="text-lg mt-3 text-white/90 italic">"{quote}"</p>
+        <p className="text-lg mt-3 text-white/90 italic">{quote}</p>
       </div>
 
       {/* Clock Section with Futuristic Font */}
