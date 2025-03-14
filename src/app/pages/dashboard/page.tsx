@@ -162,6 +162,7 @@ export default function Dashboard() {
           >
             <h1 className="text-4xl font-extrabold text-center mb-4">Task Manager</h1>
             <p className="text-lg text-center opacity-80">Welcome back, <span className="font-semibold">{username}</span>!</p>
+            <p className="text-lg text-center opacity-80">Total Tasks: {totalTasks}</p> {/* Display total tasks */}
 
             <div className="mt-8 flex gap-2">
               <label htmlFor="new-task" className="sr-only">New Task</label>
