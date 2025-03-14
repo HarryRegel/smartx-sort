@@ -38,7 +38,7 @@ export default function Dashboard() {
       // Cleanup function to avoid memory leaks
       setTasks([]);
     };
-  }, []);
+  }, [router]); // Add 'router' to the dependency array
 
   const fetchTasks = async (uid) => {
     try {
@@ -104,16 +104,6 @@ export default function Dashboard() {
 
   const completedTasks = tasks.filter(task => task.completed).length;
   const totalTasks = tasks.length;
-  const data = {
-    labels: ["Completed", "Pending"],
-    datasets: [
-      {
-        label: "Task Progress",
-        data: [completedTasks, totalTasks - completedTasks],
-        backgroundColor: ["#10B981", "#EF4444"],
-      },
-    ],
-  };
 
   if (!isLoggedIn) return null;
 
