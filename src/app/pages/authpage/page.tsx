@@ -8,14 +8,14 @@ import { auth } from '@/lib/firebase';
 export default function AuthPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [isSignUp, setIsSignUp] = useState(true);
+  const [isSignUp, setIsSignUp] = useState<boolean | null>(null); // Initially `null` to prevent hydration mismatch
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setIsSignUp(searchParams.get('mode') !== 'login');
+    setIsSignUp(searchParams.get('mode') !== 'login'); // Only update after mounting
   }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,18 +31,24 @@ export default function AuthPage() {
       }
       localStorage.setItem("isLoggedIn", "true");
       router.push('/pages/dashboard'); // Redirect to dashboard after successful login
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred.");
+      }
     } finally {
       setLoading(false);
     }
   };
 
+  if (isSignUp === null) return null; // Prevents rendering before `useEffect` runs
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-700 to-blue-600 text-white p-6">
       <div className="w-full max-w-md p-8 bg-white/20 backdrop-blur-lg rounded-lg shadow-xl">
         <h2 className="text-3xl font-extrabold text-center">{isSignUp ? 'Sign Up' : 'Login'}</h2>
-        
+
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
         <form className="space-y-4 mt-4" onSubmit={handleSubmit}>
