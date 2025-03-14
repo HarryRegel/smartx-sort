@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Plus, Trash, LogOut, Edit, CheckCircle } from "lucide-react";
-import { Pie, Line, Doughnut, Bar } from "react-chartjs-2";
+import { Pie, Line, Bar } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, ArcElement, BarElement, LineElement, Title, Tooltip, Legend, PointElement } from "chart.js";
 import { auth, db } from "@/lib/firebase";
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, where } from "firebase/firestore";
