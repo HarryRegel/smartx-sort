@@ -13,9 +13,16 @@ import MotivationClock from "@/sections/Motivationclock";
 
 ChartJS.register(CategoryScale, LinearScale, ArcElement, BarElement, LineElement, PointElement, Title, Tooltip, Legend);
 
+interface Task {
+  id: string;
+  text: string;
+  completed: boolean;
+  category?: string;
+}
+
 export default function Dashboard() {
   const router = useRouter();
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [newTask, setNewTask] = useState("");
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,7 +50,7 @@ export default function Dashboard() {
       setLoading(true);
       const taskRef = collection(db, `users/${uid}/tasks`);
       const querySnapshot = await getDocs(taskRef);
-      const taskList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const taskList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Task));
       setTasks(taskList);
     } catch (error) {
       console.error("Error fetching tasks:", error);
