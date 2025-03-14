@@ -15,13 +15,12 @@ ChartJS.register(CategoryScale, LinearScale, ArcElement, BarElement, LineElement
 
 export default function Dashboard() {
   const router = useRouter();
-  const [username, setUsername] = useState("John Doe");
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
-  const [editIndex, setEditIndex] = useState(null);
+  const [editIndex, setEditIndex] = useState<number | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     const user = auth.currentUser;
@@ -30,7 +29,6 @@ export default function Dashboard() {
     } else {
       setIsLoggedIn(true);
       setUserId(user.uid);
-      setUsername(user.email.split("@")[0]);
       fetchTasks(user.uid);
     }
 
@@ -40,7 +38,7 @@ export default function Dashboard() {
     };
   }, [router]); // Add 'router' to the dependency array
 
-  const fetchTasks = async (uid) => {
+  const fetchTasks = async (uid: string) => {
     try {
       setLoading(true);
       const taskRef = collection(db, `users/${uid}/tasks`);
@@ -73,7 +71,7 @@ export default function Dashboard() {
     }
   };
 
-  const deleteTask = async (id) => {
+  const deleteTask = async (id: string) => {
     try {
       await deleteDoc(doc(db, `users/${userId}/tasks`, id));
       fetchTasks(userId);
@@ -82,12 +80,12 @@ export default function Dashboard() {
     }
   };
 
-  const editTask = (index) => {
+  const editTask = (index: number) => {
     setNewTask(tasks[index].text);
     setEditIndex(index);
   };
 
-  const toggleComplete = async (index) => {
+  const toggleComplete = async (index: number) => {
     try {
       const taskRef = doc(db, `users/${userId}/tasks`, tasks[index].id);
       await updateDoc(taskRef, { completed: !tasks[index].completed });
@@ -161,7 +159,7 @@ export default function Dashboard() {
             className="w-full max-w-4xl p-8 bg-white/10 rounded-lg shadow-lg backdrop-blur-lg mt-16"
           >
             <h1 className="text-4xl font-extrabold text-center mb-4">Task Manager</h1>
-            <p className="text-lg text-center opacity-80">Welcome back, <span className="font-semibold">{username}</span>!</p>
+            <p className="text-lg text-center opacity-80">Welcome back, dude!</p>
             <p className="text-lg text-center opacity-80">Total Tasks: {totalTasks}</p> {/* Display total tasks */}
 
             <div className="mt-8 flex gap-2">
