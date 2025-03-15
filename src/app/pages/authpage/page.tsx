@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 
-export default function AuthPage() {
+function AuthPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [isSignUp, setIsSignUp] = useState<boolean | null>(null); // Initially `null` to prevent hydration mismatch
@@ -90,5 +90,13 @@ export default function AuthPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function AuthPageWrapper() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AuthPage />
+    </Suspense>
   );
 }
