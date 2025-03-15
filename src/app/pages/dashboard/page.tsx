@@ -80,8 +80,10 @@ export default function Dashboard() {
 
   const deleteTask = async (id: string) => {
     try {
-      await deleteDoc(doc(db, `users/${userId}/tasks`, id));
-      fetchTasks(userId);
+      if (userId) {
+        await deleteDoc(doc(db, `users/${userId}/tasks`, id));
+        fetchTasks(userId);
+      }
     } catch (error) {
       console.error("Error deleting task:", error);
     }
@@ -94,9 +96,11 @@ export default function Dashboard() {
 
   const toggleComplete = async (index: number) => {
     try {
-      const taskRef = doc(db, `users/${userId}/tasks`, tasks[index].id);
-      await updateDoc(taskRef, { completed: !tasks[index].completed });
-      fetchTasks(userId);
+      if (userId) {
+        const taskRef = doc(db, `users/${userId}/tasks`, tasks[index].id);
+        await updateDoc(taskRef, { completed: !tasks[index].completed });
+        fetchTasks(userId);
+      }
     } catch (error) {
       console.error("Error updating task:", error);
     }
