@@ -14,9 +14,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Authentication Page",
-  description: "Sign-up or Login to get Started",
+  title: "SmartX - Task Manager",
+  description: "Effortlessly manage your tasks with SmartX. Organize, track, and complete your to-dos with ease.",
 };
+
 
 export default function RootLayout({
   children,
