@@ -14,10 +14,10 @@ export default function Home() {
 
 
       <div className="mt-8 flex space-x-4">
-        <Link href="/dashboard" className="px-6 py-3 bg-white text-purple-600 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition">
+        <Link href="/pages/authpage?mode=signup" className="px-6 py-3 bg-white text-purple-600 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition">
           Get Started
         </Link>
-        <Link href="/features" className="px-6 py-3 bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition">
+        <Link href="/" className="px-6 py-3 bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition">
           Explore Features
         </Link>
       </div>
